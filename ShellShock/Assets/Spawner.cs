@@ -13,7 +13,8 @@ public class Spawner : MonoBehaviour {
 	public float curHealth;
 	public float minusAmount;
 	public float minusDelay;
-	public float spawnDelay;
+	public float bulletSpawnDelay;
+	public float feedSpawnDelay;
 	public GameObject bullet, feed, rightBoomerang, leftBoomerang, beam;
 	public Vector3 pos;
 	public Image healthbar;
@@ -23,7 +24,7 @@ public class Spawner : MonoBehaviour {
 	public float x, y;
 	public int score = 0;
 	public Text scoreText;
-	[SerializeField] private Transform shadow;
+	public GameObject introObject;
 	public GameObject menuObject;
 	public GameObject startObject;
 	public GameObject startObjectCanvas;
@@ -45,7 +46,6 @@ public class Spawner : MonoBehaviour {
 		rad = (float)deg [Random.Range (0, deg.Length)] * Mathf.Deg2Rad;
 		x = height * Mathf.Cos (rad);
 		y = height * Mathf.Sin (rad);
-		shadow.localPosition = new Vector3 (-0.125f * x, -0.125f * y, 0);
 		Spawner.spawner = this;
 		curHealth = oriHealth;
 	}
@@ -60,7 +60,8 @@ public class Spawner : MonoBehaviour {
 			scoreText.text = score.ToString ();
 			started = true;
 			StartCoroutine (HealthCoroutine ());
-			StartCoroutine (SpawnCoroutine ());
+			StartCoroutine (BulletSpawnCoroutine ());
+			StartCoroutine (FeedSpawnCoroutine ());
 		}
 	}
 
@@ -109,9 +110,9 @@ public class Spawner : MonoBehaviour {
 
 	int dice;
 	int angle;
-	IEnumerator SpawnCoroutine () {
+	IEnumerator BulletSpawnCoroutine () {
 		while (curHealth > 0) {
-			yield return new WaitForSeconds (spawnDelay);
+			yield return new WaitForSeconds (bulletSpawnDelay);
 			dice = Random.Range (0, 6);
 			angle = Random.Range (0, 360);
 			pos = new Vector3 (65f * Mathf.Cos (angle * Mathf.Deg2Rad) - 100, 65f * Mathf.Sin (angle * Mathf.Deg2Rad), 0);
@@ -120,13 +121,10 @@ public class Spawner : MonoBehaviour {
 				Instantiate (beam, pos, Quaternion.Euler (0, 0, 0));
 				break;
 			case 2:
+			case 3:
 				Instantiate (bullet, pos, Quaternion.Euler (0, 0, 0));
 				break;
-			case 3:
-				Instantiate (feed, pos, Quaternion.Euler (0, 0, 0));
-				break;
 			case 4:
-				
 				int r = Random.Range (0, 2);
 				if (r == 0) {
 					Instantiate (rightBoomerang, pos, Quaternion.Euler (0, 0, 0));
@@ -139,6 +137,14 @@ public class Spawner : MonoBehaviour {
 				Instantiate (bullet, pos, Quaternion.Euler (0, 0, 0));
 				break;
 			}
+		}
+	}
+	IEnumerator FeedSpawnCoroutine () {
+		while (curHealth > 0) {
+			yield return new WaitForSeconds (feedSpawnDelay);
+			angle = Random.Range (0, 360);
+			pos = new Vector3 (65f * Mathf.Cos (angle * Mathf.Deg2Rad) - 100, 65f * Mathf.Sin (angle * Mathf.Deg2Rad), 0);
+			Instantiate (feed, pos, Quaternion.Euler (0, 0, 0));
 		}
 	}
 }

@@ -11,7 +11,6 @@ public class JoyStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
 	[SerializeField] private Vector3 inputVector;
 	public float angle;
 	public Transform shield;
-	public Transform shieldShadow;
 	public Mode mode;
 
 	void Start () {
@@ -32,7 +31,6 @@ public class JoyStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
 			angle = Mathf.Atan2 (inputVector.z, inputVector.x);
 			if (!mode.eating) {
 				shield.rotation = Quaternion.Euler (0, 0, angle * Mathf.Rad2Deg);
-				shieldShadow.rotation = Quaternion.Euler (0, 0, angle * Mathf.Rad2Deg);
 			} else {
 				mode.beak.localPosition = new Vector3 (0.4f * Mathf.Cos (angle), 0.3f * Mathf.Sin (angle), 0);
 			}

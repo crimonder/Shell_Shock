@@ -40,16 +40,17 @@ public class ObjectClass : MonoBehaviour {
 		if (col.tag != "Boom") {
 			if (col.tag == "Shield") {
 				if (type != Type.FEED) {
-//					particleSpawn.Spawn ();
 					GameObject sp = Instantiate (shellParticle, this.transform.position, this.transform.rotation);
 					Destroy (sp, 3f);
-					if (type == Type.LEFTBOOMERANG) {
-						sp.transform.rotation = Quaternion.Euler (new Vector3 (this.transform.rotation.x, this.transform.rotation.y, 2 * (Spawner.spawner.joyStick.angle) - (this.transform.rotation.x + 180) - 180));
-					} else if (type == Type.RIGHTBOOMERANG) {
-						sp.transform.rotation = Quaternion.Euler (new Vector3 (this.transform.rotation.x, this.transform.rotation.y, 3 * (this.transform.rotation.x + 180) - 2 * (Spawner.spawner.joyStick.angle) - 180));
-					}
+//					if (type == Type.RIGHTBOOMERANG) {
+////						Debug.LogError (this.transform.rotation.z * Mathf.Rad2Deg + " " + Spawner.spawner.joyStick.angle * Mathf.Rad2Deg + " " + (2 * (Spawner.spawner.joyStick.angle) - (this.transform.rotation.z + 180) - 180).ToString ());
+//						sp.transform.rotation = Quaternion.Euler (this.transform.rotation.x, this.transform.rotation.y, 2 * (Spawner.spawner.joyStick.angle) - (this.transform.rotation.z + 180) - 210);
+//					} else if (type == Type.LEFTBOOMERANG) {
+////						Debug.LogError (this.transform.rotation.z * Mathf.Rad2Deg + " " + Spawner.spawner.joyStick.angle * Mathf.Rad2Deg + " " + (3 * (this.transform.rotation.z + 180) - 2 * (Spawner.spawner.joyStick.angle) - 180).ToString ());
+//						sp.transform.rotation = Quaternion.Euler (this.transform.rotation.x, this.transform.rotation.y, 3 * (this.transform.rotation.z + 180) - 2 * (Spawner.spawner.joyStick.angle) - 150);
+//					}
 					Spawner.spawner.AddScore (score);
-					Spawner.spawner.cameraShake.Shake (0.5f, 0.2f);
+					Spawner.spawner.cameraShake.Shake (0.1f, 0.2f);
 				}
 			} else if (col.tag == "Body") {
 				if (type != Type.FEED) {
