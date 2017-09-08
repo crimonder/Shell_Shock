@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Mode : MonoBehaviour, IPointerUpHandler, IPointerDownHandler {
+public class Mode : MonoBehaviour, IEventSystemHandler, IPointerUpHandler, IPointerDownHandler {
 
 	public JoyStick joyStick;
 	public Transform beak;
@@ -27,6 +27,14 @@ public class Mode : MonoBehaviour, IPointerUpHandler, IPointerDownHandler {
 		GetComponent<Image> ().color = new Color (1, 1, 1, 1);
 		shield.SetActive (true);
 		beak.GetComponent<CapsuleCollider2D> ().enabled = false;
+	}
+
+	void MenuAcceptFunction () {
+
+	}
+
+	void PauseAcceptFuntion () {
+
 	}
 
 	void Update () {

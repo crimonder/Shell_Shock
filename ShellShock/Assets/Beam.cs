@@ -14,7 +14,7 @@ public class Beam : MonoBehaviour {
 	Vector3 vectorTmp;
 
 	void Awake () {
-		vectorTmp = new Vector3 (transform.position.x - Spawner.spawner.x, transform.position.y - Spawner.spawner.y, transform.position.z);
+		vectorTmp = new Vector3 (transform.position.x - Manager.manager.x, transform.position.y - Manager.manager.y, transform.position.z);
 		tmp = transform.FindChild ("BeamScale");
 		thisVectror2 = new Vector2 (transform.position.x, transform.position.y);
 		rad = Mathf.Atan2 (transform.position.y - origin.y, transform.position.x - origin.x);
@@ -28,11 +28,11 @@ public class Beam : MonoBehaviour {
 		if (col) {
 			if (col.transform.tag == "Body") {
 				tmp.localScale = new Vector3 (350, tmp.localScale.y, tmp.localScale.z);
-				Spawner.spawner.SetHealth (-1, amount);
-				Spawner.spawner.cameraShake.Shake (1, 0.2f);
+				Manager.manager.SetHealth (-1, amount);
+				Manager.manager.cameraShake.Shake (1, 0.2f);
 			} else {
 				tmp.localScale = new Vector3 (280, tmp.localScale.y, tmp.localScale.z);
-				Spawner.spawner.AddScore (score);
+				Manager.manager.AddScore (score);
 			}
 		}
 	}

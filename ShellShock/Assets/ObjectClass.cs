@@ -49,21 +49,21 @@ public class ObjectClass : MonoBehaviour {
 ////						Debug.LogError (this.transform.rotation.z * Mathf.Rad2Deg + " " + Spawner.spawner.joyStick.angle * Mathf.Rad2Deg + " " + (3 * (this.transform.rotation.z + 180) - 2 * (Spawner.spawner.joyStick.angle) - 180).ToString ());
 //						sp.transform.rotation = Quaternion.Euler (this.transform.rotation.x, this.transform.rotation.y, 3 * (this.transform.rotation.z + 180) - 2 * (Spawner.spawner.joyStick.angle) - 150);
 //					}
-					Spawner.spawner.AddScore (score);
-					Spawner.spawner.cameraShake.Shake (0.1f, 0.2f);
+					Manager.manager.AddScore (score);
+					Manager.manager.cameraShake.Shake (0.1f, 0.2f);
 				}
 			} else if (col.tag == "Body") {
 				if (type != Type.FEED) {
-					Spawner.spawner.SetHealth (-1, amount);
-					Spawner.spawner.cameraShake.Shake (1, 0.2f);
+					Manager.manager.SetHealth (-1, amount);
+					Manager.manager.cameraShake.Shake (1, 0.2f);
 				}
 			} else if (col.tag == "Beak") {
 				if (type == Type.FEED) {
-					Spawner.spawner.SetHealth (1, amount);
-					Spawner.spawner.AddScore (score);
+					Manager.manager.SetHealth (1, amount);
+					Manager.manager.AddScore (score);
 				} else {
-					Spawner.spawner.SetHealth (-1, amount);
-					Spawner.spawner.cameraShake.Shake (1, 0.2f);
+					Manager.manager.SetHealth (-1, amount);
+					Manager.manager.cameraShake.Shake (1, 0.2f);
 				}
 			}
 			Destroy (this.gameObject);

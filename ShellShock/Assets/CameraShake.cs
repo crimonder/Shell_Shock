@@ -10,7 +10,7 @@ public class CameraShake : MonoBehaviour {
 
 	void Start () {
 		cam = GetComponent<Camera> ();
-		Spawner.spawner.cameraShake = this;
+		Manager.manager.cameraShake = this;
 	}
 
 	public void Shake (float amt, float length) {
